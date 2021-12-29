@@ -1,8 +1,5 @@
-import json
-import os
 from datetime import datetime
 from bs4 import BeautifulSoup
-from collections import OrderedDict
 
 import urllib.request
 
@@ -30,13 +27,9 @@ def parsing_result(search_city: str, search_date: str):
     rows = table_body.find_all('tr')
     for row in rows:
         tmp_cols = row.find_all('td')
-        cols = [ele.text.strip() for ele in tmp_cols]
-        # tmp_list = [ele for ele in cols if ele]
-        parsing_list = [ele for ele in cols if cols.index(ele) != 2]
-        # for ele in cols:
-        #     if ele not in all_scheldules  and cols.index(ele) != 2:
-        #         all_scheldules.append([ele])
-        all_scheldules.append([ele for ele in parsing_list if ele not in all_scheldules])
+        cols = [element.text.strip() for element in tmp_cols]
+        parsing_list = [element for element in cols if cols.index(element) != 2]
+        all_scheldules.append([element for element in parsing_list if element])
 
     return all_scheldules
 

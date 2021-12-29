@@ -92,7 +92,6 @@ def on_callback_query(update, context):
                 reply_markup=ReplyKeyboardRemove()
             )
 
-
             tmp_result = parsing_result(search_cities[update.effective_chat.id], search_dates[update.effective_chat.id])
             tmp_result_str = '\n'.join(str(', '.join(e)) for e in tmp_result)
 
@@ -106,9 +105,6 @@ def on_callback_query(update, context):
                     chat_id=update.effective_chat.id,
                     text=tmp_result_str
                 )
-
-
-
 
 
 def unknown(update, context):
