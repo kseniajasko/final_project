@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-#
+
 # A library that allows to create an inline calendar keyboard.
 # grcanosa https://github.com/grcanosa
 #
@@ -7,10 +6,12 @@
 Base methods for calendar keyboard creation and processing.
 """
 
-
+import locale
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup,ReplyKeyboardRemove
 import datetime
 import calendar
+
+locale.setlocale(locale.LC_ALL, 'uk_UA')
 
 def create_callback_data(action,year,month,day):
     """ Create the callback data associated to each button"""
@@ -39,7 +40,7 @@ def create_calendar(year=None,month=None):
     keyboard.append(row)
     #Second row - Week Days
     row=[]
-    for day in ["Mo","Tu","We","Th","Fr","Sa","Su"]:
+    for day in ["пн","вт","ср","чт","пт","сб","нд"]:
         row.append(InlineKeyboardButton(day,callback_data=data_ignore))
     keyboard.append(row)
 
@@ -54,9 +55,9 @@ def create_calendar(year=None,month=None):
         keyboard.append(row)
     #Last row - Buttons
     row=[]
-    row.append(InlineKeyboardButton("<",callback_data=create_callback_data("PREV-MONTH",year,month,day)))
+    # row.append(InlineKeyboardButton("PREV-MONTH",callback_data=create_callback_data("PREV-MONTH",year,month,day)))
     # row.append(InlineKeyboardButton(" ",callback_data=data_ignore))
-    row.append(InlineKeyboardButton(">",callback_data=create_callback_data("NEXT-MONTH",year,month,day)))
+    row.append(InlineKeyboardButton("Наступний місяць",callback_data=create_callback_data("NEXT-MONTH",year,month,day)))
     keyboard.append(row)
 
     return InlineKeyboardMarkup(keyboard)

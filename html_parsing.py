@@ -1,7 +1,11 @@
+import itertools, operator
+import urllib.request
+
+from collections import OrderedDict
 from datetime import datetime
 from bs4 import BeautifulSoup
 
-import urllib.request
+
 
 
 names = dict()
@@ -31,11 +35,37 @@ def parsing_result(search_city: str, search_date: str):
         parsing_list = [element for element in cols if cols.index(element) != 2]
         all_scheldules.append([element for element in parsing_list if element])
 
-    return all_scheldules
+    all_scheldules_remove_duplicates = list(set(map(lambda i: tuple(i), all_scheldules)))
+
+    # result = [list(itertools.chain.from_iterable(itertools.islice(all_scheldules_remove_duplicates, i, i + 5))) for i in range(0, len(all_scheldules_remove_duplicates), 5)]
+    return all_scheldules_remove_duplicates
+
+def new_text_view(result_list):
+
+    i = 1
+    tmp_list = []
+    new_list = []
+    for element in result_list:
+        tmp_list.append(list(element))
+
+    for element in tmp_list:
+        element.insert(0, f'*{i}* \U0001F689')
+        i += 1
+
+    for element in tmp_list:
+        new_list.append(list(map(operator.add, itertools.cycle(('', '*Номер поїзда*: ', '*Назва поїзда*: ',
+            '*Час прибуття*: ', '*Час відправки*: ')), element)))
+        new_list.append('\n')
+
+    result = [list(itertools.chain.from_iterable(itertools.islice(new_list, i, i + 6))) for i in
+              range(0, len(new_list), 6)]
+
+    return result
+
 
 
 if __name__ == '__main__':
     now = datetime.now()
     search_date = now.strftime("%d.%m.%Y")
     search_city = 'Odessa'
-    print(parsing_result(search_city, search_date))
+    print(new_text_view(parsing_result(search_city, search_date)))
