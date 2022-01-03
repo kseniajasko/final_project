@@ -1,0 +1,6 @@
+2022-01-03 21:15:53,388 - apscheduler.scheduler - INFO - Scheduler started
+2022-01-03 21:15:58,422 - __main__ - INFO - User  started Oksana Satur, chat_id is 905782311
+2022-01-03 21:16:01,727 - __main__ - INFO - User 905782311 selected ujgorod, 27.01.2022
+2022-01-03 21:16:20,998 - __main__ - INFO - User 905782311 have got result
+2022-01-03 21:17:14,790 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2022-01-03 21:17:14,791 - apscheduler.scheduler - INFO - Scheduler has been shut down
