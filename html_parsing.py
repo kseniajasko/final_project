@@ -1,12 +1,7 @@
-import itertools, operator
-import urllib.request
+import itertools, operator, urllib.request
 
-from collections import OrderedDict
 from datetime import datetime
 from bs4 import BeautifulSoup
-
-
-
 
 names = dict()
 names['train_number'] = 0
@@ -37,17 +32,15 @@ def parsing_result(search_city: str, search_date: str):
 
     all_scheldules_remove_duplicates = list(set(map(lambda i: tuple(i), all_scheldules)))
 
-    # result = [list(itertools.chain.from_iterable(itertools.islice(all_scheldules_remove_duplicates, i, i + 5))) for i in range(0, len(all_scheldules_remove_duplicates), 5)]
     return all_scheldules_remove_duplicates
 
 def new_text_view(result_list):
 
-    i = 1
-    tmp_list = []
     new_list = []
-    for element in result_list:
-        tmp_list.append(list(element))
 
+    tmp_list = [list(element) for element in result_list]
+
+    i = 1
     for element in tmp_list:
         element.insert(0, f'*{i}* \U0001F689')
         i += 1
@@ -64,8 +57,8 @@ def new_text_view(result_list):
 
 
 
-if __name__ == '__main__':
-    now = datetime.now()
-    search_date = now.strftime("%d.%m.%Y")
-    search_city = 'Odessa'
-    print(new_text_view(parsing_result(search_city, search_date)))
+# if __name__ == '__main__':
+#     now = datetime.now()
+#     search_date = now.strftime("%d.%m.%Y")
+#     search_city = 'Odessa'
+#     print(new_text_view(parsing_result(search_city, search_date)))
