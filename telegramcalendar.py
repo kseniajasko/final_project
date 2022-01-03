@@ -55,7 +55,7 @@ def create_calendar(year=None,month=None):
         keyboard.append(row)
     #Last row - Buttons
     row=[]
-    # row.append(InlineKeyboardButton("PREV-MONTH",callback_data=create_callback_data("PREV-MONTH",year,month,day)))
+    row.append(InlineKeyboardButton("Попередній місяць",callback_data=create_callback_data("PREV-MONTH",year,month,day)))
     # row.append(InlineKeyboardButton(" ",callback_data=data_ignore))
     row.append(InlineKeyboardButton("Наступний місяць",callback_data=create_callback_data("NEXT-MONTH",year,month,day)))
     keyboard.append(row)
