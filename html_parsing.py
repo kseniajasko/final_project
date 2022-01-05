@@ -1,6 +1,5 @@
 import itertools, operator, urllib.request
 
-from datetime import datetime
 from bs4 import BeautifulSoup
 
 names = dict()

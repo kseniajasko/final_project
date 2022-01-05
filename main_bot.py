@@ -1,12 +1,9 @@
-import logging, os
-
-from datetime import timedelta
 
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardRemove
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, ConversationHandler, MessageHandler, Filters
 from telegram_bot_pagination import InlineKeyboardPaginator
-
-import telegramcalendar
+from datetime import timedelta
+import logging, os, telegramcalendar
 from html_parsing import *
 
 

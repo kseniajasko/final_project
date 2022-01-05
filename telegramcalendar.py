@@ -6,10 +6,8 @@
 Base methods for calendar keyboard creation and processing.
 """
 
-import locale
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup,ReplyKeyboardRemove
-import datetime
-import calendar
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+import datetime, calendar, locale
 
 locale.setlocale(locale.LC_ALL, 'uk_UA')
 
@@ -20,7 +18,6 @@ def create_callback_data(action,year,month,day):
 def separate_callback_data(data):
     """ Separate the callback data"""
     return data.split(";")
-
 
 def create_calendar(year=None,month=None):
     """
@@ -56,7 +53,6 @@ def create_calendar(year=None,month=None):
     #Last row - Buttons
     row=[]
     row.append(InlineKeyboardButton("Попередній місяць",callback_data=create_callback_data("PREV-MONTH",year,month,day)))
-    # row.append(InlineKeyboardButton(" ",callback_data=data_ignore))
     row.append(InlineKeyboardButton("Наступний місяць",callback_data=create_callback_data("NEXT-MONTH",year,month,day)))
     keyboard.append(row)
 
