@@ -2,7 +2,7 @@
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardRemove
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, ConversationHandler, MessageHandler, Filters
 from telegram_bot_pagination import InlineKeyboardPaginator
-from datetime import timedelta
+from datetime import timedelta, datetime
 import logging, os, telegramcalendar
 from html_parsing import *
 
@@ -152,8 +152,13 @@ def result_page_callback(update, context):
 def unknown(update, context):
     context.bot.send_message(
         chat_id=update.effective_chat.id,
-        text='Вибачте, я не знаю цієї команди.'
+        text='Вибачте, я не знаю цієї команди \U0001F613'
     )
+
+def echo(update, context):
+    text = 'ECHO: ' + update.message.text
+    context.bot.send_message(chat_id=update.effective_chat.id,
+                             text='Я Вас не розумію \U0001F613 \nБудь ласка, використовуйте лише запропоновані команди \U0001F60A')
 
 if __name__ == '__main__':
 
@@ -178,6 +183,9 @@ if __name__ == '__main__':
 
     unknown_handler = MessageHandler(Filters.command, unknown)
     updater.dispatcher.add_handler(unknown_handler)
+
+    echo_handler = MessageHandler(Filters.text & (~Filters.command), echo)
+    dispatcher.add_handler(echo_handler)
 
     updater.start_polling()
     updater.idle()
